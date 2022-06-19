@@ -1,17 +1,10 @@
-/**
- *  自定义网站配置 
- */
 const config = {
-  title: "96596导航网 | 96596.net",                 //write your website title
-  subtitle: "您正在访问的域名可以转让出售 | This Domain-Name is for SALE now!", //write your website subtitle
+  title: "domain",                 //write your website title
+  subtitle: "This Domain-Name is for SALE now!", //write your website subtitle
   logo_icon: "cart arrow down",               //select your logo by semantic-ui icon (you can get more msg in:https://semantic-ui.com/elements/icon.html)
   hitokoto: false,                     //use hitokoto or not
   search:true,                        //enable search function
   search_engine:[                     //choose search engine which you use
-    {
-      name:"Baidu",
-      template:"https://www.baidu.com/s?wd=$s"
-    },
     {
       name:"Google",
       template:"https://www.google.com/search?q=$s"
@@ -23,13 +16,13 @@ const config = {
   ],
   selling_ads: true,                  //Selling your domain or not.(turning on may be helpful for selling this domain by showing some ads.)
   sell_info:{
-    domain:"96596.net",
-    price:9999,                        //domain price
-    mon_unit:"yen sign",              //monetary unit 
+    domain:"0815.net",
+    price:99,                        //domain price
+    mon_unit:"euro sign",              //monetary unit 
     contact:[                         //how to contact you
       {
         type:"envelope",               //contact type ("weixin","qq","telegram plane","envelope" or "phone")
-        content:"vinson@88.com"
+        content:"xx"
       }
     ]                        
   },
@@ -51,9 +44,6 @@ addEventListener('fetch', event => {
   return event.respondWith(handleRequest(event.request))
 })
 
-/*通过分析链接 实时获取favicon
-* @url 需要分析的Url地址
-*/
 function getFavicon(url){
   if(url.match(/https{0,1}:\/\//)){
     //return "https://ui-avatars.com/api/?bold=true&size=36&background=0D8ABC&color=fff&rounded=true&name=" + url.split('//')[1];
@@ -65,11 +55,10 @@ function getFavicon(url){
 }
 
 /** Render Functions
- *  渲染模块函数
  */
 
 function renderIndex(){
-  const footer = el('footer',[],el('div',['class="footer"'],'Powered by' + el('a',['class="ui label"','href="https://github.com/LoveSoGood/Cloudflare-Worker-Domain-Sale"','target="_blank"'],el('i',['class="github icon"'],"") + 'Cloudflare-Worker-Domain-Sale') + ' &copy; Base on ' + el('a',['class="ui label"'],el('i',['class="balance scale icon"'],"") + 'MIT License')));
+  const footer = el('footer',[],el('div',['class="footer"'],'Powered by' + el('a',['class="ui label"','href="https://github.com/heikowingerath/Cloudflare-Worker-Domain-Sale"','target="_blank"'],el('i',['class="github icon"'],"") + 'Cloudflare-Worker-Domain-Sale') + ' &copy; Base on ' + el('a',['class="ui label"'],el('i',['class="balance scale icon"'],"") + 'MIT License')));
   return renderHeader() + renderMain() + footer;
 }
 
@@ -86,7 +75,7 @@ function renderHeader(){
     }
   }).join(""))
   var input = el('div',['class="ui left corner labeled right icon fluid large input"'],el('div',['class="ui left corner label"'],el('img',['id="search-fav"','class="left floated avatar ui image"','src="https://www.baidu.com/favicon.ico"'],"")) + el('input',['id="searchinput"','type="search"','placeholder="Search……"','autocomplete="off"'],"") + el('i',['class="inverted circular search link icon"'],""));
-  return el('header',[],el('div',['id="head"','class="ui inverted vertical masthead center aligned segment"'],(config.hitokoto ? el('div',['id="nav"','class="ui container"'],nav) : "") + el('div',['id="title"','class="ui text container"'],title + (config.search ? input + menu :"") + `${config.selling_ads ? '<div><a id="menubtn" class="red ui icon inverted button"><i class="heart icon"></i> 购买此域名 | Buy This Domain「96596.net」 </a></div>' : ''}`)))
+  return el('header',[],el('div',['id="head"','class="ui inverted vertical masthead center aligned segment"'],(config.hitokoto ? el('div',['id="nav"','class="ui container"'],nav) : "") + el('div',['id="title"','class="ui text container"'],title + (config.search ? input + menu :"") + `${config.selling_ads ? '<div><a id="menubtn" class="red ui icon inverted button"><i class="heart icon"></i> Buy This Domain「0815.net」 </a></div>' : ''}`)))
 }
 
 function renderMain() {
@@ -106,22 +95,22 @@ function renderMain() {
 
 function renderSeller() {
   const item = (type,content) => el('div',['class="item"'],el('i',[`class="${type} icon"`],"") + el('div',['class="content"'],content));
-  var title = el('h1',['class="ui yellow dividing header"'],el('i',['class="gem outline icon"'],"") + el('div',['class="content"'],config.sell_info.domain + ' 正在出售 | This Domain-Name is for SALE now'));
-  var action = el('div',['class="actions"'],el('div',['class="ui basic cancel inverted button"'],el('i',['class="reply icon"'],"") + '返回 | Back'));
+  var title = el('h1',['class="ui yellow dividing header"'],el('i',['class="gem outline icon"'],"") + el('div',['class="content"'],config.sell_info.domain + ' This Domain-Name is for SALE now'));
+  var action = el('div',['class="actions"'],el('div',['class="ui basic cancel inverted button"'],el('i',['class="reply icon"'],"") + 'Back'));
 
   var contact = config.sell_info.contact.map((list) => {
     return item(list.type,list.content);
   }).join("");
-  var column = el('div',['class="column"'],el('h3',['class="ui center aligned icon inverted header"'],el('i',['class="circular envelope open outline grey inverted icon"'],"") + '联系我 | Contact') + el('div',['class="ui relaxed celled large list"'],contact));
+  var column = el('div',['class="column"'],el('h3',['class="ui center aligned icon inverted header"'],el('i',['class="circular envelope open outline grey inverted icon"'],"") + 'Contact') + el('div',['class="ui relaxed celled large list"'],contact));
   var price = el('div',['class="column"'],el('div',['class="ui large yellow statistic"'],el('div',['class="value"'],el('i',[`class="${config.sell_info.mon_unit} icon"`],"") + config.sell_info.price)));
-  var content = el('div',['class="content"'],el('div',['class="ui basic segment"'],el('div',['class="ui two column stackable center aligned grid"'],el('div',['class="ui inverted vertical divider"'],'感兴趣？| Wanna Buy?') + el('div',['class="middle aligned row"'],price + column))));
+  var content = el('div',['class="content"'],el('div',['class="ui basic segment"'],el('div',['class="ui two column stackable center aligned grid"'],el('div',['class="ui inverted vertical divider"'],'Wanna Buy?') + el('div',['class="middle aligned row"'],price + column))));
 
   return el('div',['id="seller"','class="ui basic modal"'],title + content + action);
 }
 
 function renderHTML(index,seller) {
   return `<!DOCTYPE html>
-  <html lang="en">
+  <html lang="de">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -135,7 +124,7 @@ function renderHTML(index,seller) {
   <body>
     ${index}
     ${config.selling_ads ? seller : ''}
-    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+    //<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
     <script>
       $('#sengine a').on('click', function (e) {
         $('#sengine a.active').toggleClass('active');
@@ -147,10 +136,8 @@ function renderHTML(index,seller) {
           url = url.replace(`+/\$s/+`,$('#searchinput').val());
           window.open(url);
       });
-      /* 鼠标聚焦时，回车事件 */
       $("#searchinput").bind("keypress", function(){
           if (event.keyCode == 13){
-          // 触发需要调用的方法
           $(".search").click();
           }
       });
